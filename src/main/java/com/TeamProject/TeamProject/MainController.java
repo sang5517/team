@@ -11,4 +11,10 @@ public class MainController {
     public String test(){
         return "test";
     }
+
+    @RequestMapping("/list")
+    @ResponseBody
+    public String list(){
+        return "list";
+    }
 }
