@@ -23,7 +23,7 @@ public class NaverController {
         URI uri = UriComponentsBuilder
                 .fromUriString("https://openapi.naver.com")
                 .path("/v1/search/local.json")
-                .queryParam("query","파스타")
+                .queryParam("query","대전 서구 국밥")
                 .queryParam("display", 100)
                 .queryParam("start", 1)
                 .queryParam("sort", "random")
