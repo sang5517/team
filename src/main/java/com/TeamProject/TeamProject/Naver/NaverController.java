@@ -1,6 +1,12 @@
 package com.TeamProject.TeamProject.Naver;
 
 import ch.qos.logback.classic.Logger;
+import com.TeamProject.TeamProject.Model.Restaurant;
+import com.TeamProject.TeamProject.Model.RestaurantRepository;
+import com.TeamProject.TeamProject.Model.RestaurantService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +23,12 @@ import java.net.URI;
 import java.nio.charset.Charset;
 
 @Controller
+@RequiredArgsConstructor
 public class NaverController {
+
+    private final RestaurantRepository restaurantRepository;
+    private final RestaurantService restaurantService;
+
     // Declare a logger
     private static final Logger log = (Logger) LoggerFactory.getLogger(NaverController.class);
 
@@ -47,6 +58,7 @@ public class NaverController {
 
         ResponseEntity<String> result = restTemplate.exchange(req, String.class);
         saveJsonToFile(result.getBody());
+        restaurantService.saveJsonToDatabase(result.getBody());
 
         return result.getBody();
     }
