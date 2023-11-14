@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
-
 
 @Controller
 public class NaverController {
@@ -23,7 +26,7 @@ public class NaverController {
         URI uri = UriComponentsBuilder
                 .fromUriString("https://openapi.naver.com")
                 .path("/v1/search/local.json")
-                .queryParam("query","대전 서구 국밥")
+                .queryParam("query","대전 서구 월평동 맛집")
                 .queryParam("display", 100)
                 .queryParam("start", 1)
                 .queryParam("sort", "random")
@@ -43,7 +46,29 @@ public class NaverController {
                 .build();
 
         ResponseEntity<String> result = restTemplate.exchange(req, String.class);
+        saveJsonToFile(result.getBody());
 
         return result.getBody();
+    }
+
+    private void saveJsonToFile(String jsonData) {
+        try {
+            // Specify the file path where you want to save the JSON data on the desktop
+            String desktopPath = System.getProperty("user.home") + "/Desktop";
+            String filePath = desktopPath + "/naver_search_result.text";
+
+            // Create a File object
+            File file = new File(filePath);
+
+            // Create a BufferedWriter to write data to the file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                // Write the JSON data to the file
+                writer.write(jsonData);
+            }
+
+            log.info("JSON data saved to file: {}", filePath);
+        } catch (IOException e) {
+            log.error("Error saving JSON data to file", e);
+        }
     }
 }
