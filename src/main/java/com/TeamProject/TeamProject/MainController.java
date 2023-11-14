@@ -11,21 +11,10 @@ public class MainController {
     public String test(){
         return "test";
     }
-
-    @RequestMapping("/list")
+    @RequestMapping("/main")
     @ResponseBody
-    public String list(){
-        return "list";
-    }
-    @RequestMapping("/asd")
-    @ResponseBody
-    public String ad(){
-        return "asd";
+    public String main(){
+        return "main";
     }
 
-    @RequestMapping("/aaa")
-    @ResponseBody
-    public String aaa(){
-        return "aaa";
-    }
 }
