@@ -17,7 +17,6 @@ public class MainController {
     public String list(){
         return "list";
     }
-
     @RequestMapping("/asd")
     @ResponseBody
     public String ad(){
