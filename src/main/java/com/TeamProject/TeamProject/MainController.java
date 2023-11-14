@@ -12,9 +12,8 @@ public class MainController {
         return "test";
     }
     @RequestMapping("/main")
-    @ResponseBody
     public String main(){
-        return "main";
+        return "index";
     }
 
 //    sdlkfjioewjflkjsda
