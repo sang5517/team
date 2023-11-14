@@ -22,4 +22,10 @@ public class MainController {
     public String ad(){
         return "asd";
     }
+
+    @RequestMapping("/aaa")
+    @ResponseBody
+    public String aaa(){
+        return "aaa";
+    }
 }
