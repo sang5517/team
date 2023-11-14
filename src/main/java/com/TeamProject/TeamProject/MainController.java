@@ -18,5 +18,9 @@ public class MainController {
     }
 
 //    sdlkfjioewjflkjsda
-
+    @RequestMapping("/list")
+    @ResponseBody
+    public String list(){
+        return "list";
+    }
 }
